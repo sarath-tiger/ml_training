@@ -1,0 +1,5 @@
+project: 'housing'
+git_url: "https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz"
+dataset_out_path: 'data/raw'
+split_data_path: 'data/processed'
+ml_model_path: 'artifacts/model'

@@ -1,0 +1,10 @@
+pyproject.toml
+my_ml/__init__.py
+my_ml/ingest_data.py
+my_ml/logger.py
+my_ml/score.py
+my_ml/train.py
+my_ml.egg-info/PKG-INFO
+my_ml.egg-info/SOURCES.txt
+my_ml.egg-info/dependency_links.txt
+my_ml.egg-info/top_level.txt
