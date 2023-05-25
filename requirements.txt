@@ -1,59 +1,64 @@
-appdirs==1.4.4
-black @ file:///croot/black_1680737249031/work
-Bottleneck @ file:///work/ci_py311/bottleneck_1676827011612/work
-brotlipy==0.7.0
-build==0.10.0
-certifi @ file:///croot/certifi_1683875369620/work/certifi
-cffi @ file:///work/ci_py311/cffi_1676822533496/work
-charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
-click @ file:///work/ci_py311/click_1676825163161/work
-contourpy @ file:///work/ci_py311/contourpy_1676827066340/work
-cryptography @ file:///work/ci_py311_2/cryptography_1679335572456/work
-cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
-flake8 @ file:///work/ci_py311/flake8_1677709235205/work
-fonttools==4.25.0
-idna @ file:///work/ci_py311/idna_1676822698822/work
-iniconfig==2.0.0
-install==1.3.5
-isort @ file:///tmp/build/80754af9/isort_1628603791788/work
-joblib @ file:///work/ci_py311/joblib_1676837020463/work
-kiwisolver @ file:///work/ci_py311/kiwisolver_1676827230232/work
-matplotlib @ file:///croot/matplotlib-suite_1679593461707/work
-mccabe @ file:///opt/conda/conda-bld/mccabe_1644221741721/work
-mkl-fft==1.3.6
-mkl-random @ file:///work/mkl/mkl_random_1682950433854/work
-mkl-service==2.4.0
-munkres==1.1.4
-my-ml @ file:///Desktop/src/dist/my_ml-0.0.1-py3-none-any.whl
-mypy-extensions==0.4.3
-numexpr @ file:///croot/numexpr_1683221822650/work
-numpy @ file:///work/mkl/numpy_and_numpy_base_1682953417311/work
-packaging @ file:///croot/packaging_1678965309396/work
-pandas==1.5.3
-pathspec @ file:///work/ci_py311_2/pathspec_1679337288229/work
-Pillow==9.4.0
-platformdirs @ file:///work/ci_py311/platformdirs_1676823055788/work
-pluggy==1.0.0
-ply==3.11
-pooch @ file:///tmp/build/80754af9/pooch_1623324770023/work
-pycodestyle @ file:///work/ci_py311/pycodestyle_1677708783451/work
-pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
-pyflakes @ file:///work/ci_py311/pyflakes_1677708650266/work
-pyOpenSSL @ file:///croot/pyopenssl_1678965284384/work
-pyparsing @ file:///work/ci_py311/pyparsing_1677811559502/work
-pyproject_hooks==1.0.0
-PyQt5-sip==12.11.0
-PySocks @ file:///work/ci_py311/pysocks_1676822712504/work
-pytest==7.3.1
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
-pytz @ file:///work/ci_py311/pytz_1676825004346/work
-PyYAML @ file:///work/ci_py311/pyyaml_1676827445582/work
-requests @ file:///croot/requests_1682607517574/work
-scikit-learn @ file:///croot/scikit-learn_1680198742267/work
-scipy==1.10.1
-sip @ file:///work/ci_py311/sip_1676825117084/work
-six @ file:///tmp/build/80754af9/six_1644875935023/work
-threadpoolctl @ file:///Users/ktietz/demo/mc3/conda-bld/threadpoolctl_1629802263681/work
-toml @ file:///tmp/build/80754af9/toml_1616166611790/work
-tornado @ file:///work/ci_py311/tornado_1676823418767/work
-urllib3 @ file:///croot/urllib3_1680254681959/work
+Package            Version
+------------------ --------
+appdirs            1.4.4
+black              0.0
+Bottleneck         1.3.5
+brotlipy           0.7.0
+build              0.10.0
+certifi            2023.5.7
+cffi               1.15.1
+charset-normalizer 2.0.4
+click              8.0.4
+contourpy          1.0.5
+cryptography       39.0.1
+cycler             0.11.0
+flake8             6.0.0
+fonttools          4.25.0
+idna               3.4
+iniconfig          2.0.0
+install            1.3.5
+isort              5.9.3
+joblib             1.1.1
+kiwisolver         1.4.4
+matplotlib         3.7.1
+mccabe             0.7.0
+mkl-fft            1.3.6
+mkl-random         1.2.2
+mkl-service        2.4.0
+munkres            1.1.4
+my-ml              0.0.1
+mypy-extensions    0.4.3
+numexpr            2.8.4
+numpy              1.24.3
+packaging          23.0
+pandas             1.5.3
+pathspec           0.10.3
+Pillow             9.4.0
+pip                23.0.1
+platformdirs       2.5.2
+pluggy             1.0.0
+ply                3.11
+pooch              1.4.0
+pycodestyle        2.10.0
+pycparser          2.21
+pyflakes           3.0.1
+pyOpenSSL          23.0.0
+pyparsing          3.0.9
+pyproject_hooks    1.0.0
+PyQt5-sip          12.11.0
+PySocks            1.7.1
+pytest             7.3.1
+python-dateutil    2.8.2
+pytz               2022.7
+PyYAML             6.0
+requests           2.29.0
+scikit-learn       1.2.2
+scipy              1.10.1
+setuptools         67.7.2
+sip                6.6.2
+six                1.16.0
+threadpoolctl      2.2.0
+toml               0.10.2
+tornado            6.2
+urllib3            1.26.15
+wheel              0.38.4
