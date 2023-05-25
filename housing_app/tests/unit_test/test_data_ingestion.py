@@ -14,10 +14,8 @@ args = parser.parse_args()
 
 
 log_initialize(os.path.basename(__file__))
-project_path = os.path.dirname(os.path.dirname(os.getcwd()))
+project_path = os.path.join("/".join(os.getcwd().split("housing_app")[0]),"housing_app")
 # project_path = os.path.dirname(os.path.dirname(os.path.basename(__file__)))
-if project_path == "/":
-    project_path = ""
 config_file = os.path.join(project_path, "config", "housing.yml")
 
 print(config_file)
