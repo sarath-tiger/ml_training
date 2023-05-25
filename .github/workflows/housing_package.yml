@@ -30,12 +30,12 @@ jobs:
         python -m pip install flake8 pytest
         pip install --upgrade setuptools
         pip install --upgrade build
-        cd housing_app/src
+        cd housing_app/
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        cd src
         python -m build
         pip install dist/my_ml-0.0.1-py3-none-any.whl --force-reinstall
-        #if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         cd ../../
-        pip install -r requirements.txt
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
