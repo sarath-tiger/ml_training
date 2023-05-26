@@ -49,6 +49,8 @@ def test_fetch_housing_data():
 split_result = get_train_val_test_data(dataset_path, split_data_path)
 if split_result:
     logging.info("Data has been splitted and saved in {}".format(split_data_path))
+    logging.info("file present in {}".format(split_data_path))
+    logging.info(','.join(os.listdir(split_data_path)))
     logging.info("Exiting the split function")
     logging.info("Ingest data script testing completed..!")
 else:
