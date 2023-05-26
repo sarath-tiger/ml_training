@@ -30,6 +30,7 @@ def income_cat_proportions(data):
 
 def housing_pre_process_eda(config):
     logging.info("Starting housing preprocess & EDA")
+    logging.info("split_data_path--> {}".format(config["split_data_path"]))
     housing = pd.read_csv(os.path.join(config["split_data_path"], "housing.csv"))
     logging.info("Reading the required data files")
     strat_test_set = pd.read_csv(

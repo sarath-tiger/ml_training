@@ -6,3 +6,6 @@ logs
 .*pkl
 model
 *tgz
+*.whl
+*.gz
+/dist

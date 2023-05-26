@@ -1,6 +1,6 @@
 from my_ml.ingest_data import fetch_housing_data, get_train_val_test_data
 from my_ml.train import housing_pre_process_eda, housing_model_build
-from my_ml.logger import *
+from my_ml.logger import logging, log_initialize
 import os
 import yaml
 import argparse
@@ -35,7 +35,7 @@ if args.split_data_path is None:
     split_data_path = os.path.join(project_path, config["split_data_path"])
 else:
     split_data_path = os.path.join(project_path, args.split_data_path)
-
+config['split_data_path'] = split_data_path
 data_result = fetch_housing_data(git_url, dataset_path)
 if data_result:
     logging.info("Data has been downloaded in {}".format(dataset_path))
@@ -53,6 +53,8 @@ if split_result:
     logging.info("file present in {}".format(split_data_path))
     logging.info(','.join(os.listdir(split_data_path)))
     logging.info("Exiting the split function")
+    logging.info("******************")
+    logging.info(config['split_data_path'])
     logging.info("Ingest data script testing completed..!")
 else:
     logging.error("Data splitting failed")
