@@ -1,4 +1,5 @@
 from my_ml.ingest_data import fetch_housing_data, get_train_val_test_data
+#from my_ml.train import housing_pre_process_eda, housing_model_build
 from my_ml.logger import *
 import os
 import yaml
@@ -59,3 +60,4 @@ else:
 @pytest.mark.run(order=2)
 def test_get_train_val_test_data():
     assert split_result == True
+

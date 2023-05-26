@@ -13,36 +13,31 @@ parser.add_argument("ml_model_path", nargs="?", type=str)
 args = parser.parse_args()
 
 log_initialize(os.path.basename(__file__))
-
 project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+# project_path = os.path.dirname(os.path.dirname(os.path.basename(__file__)))
 config_file = os.path.join(project_path, "config", "housing.yml")
 
+print(config_file)
 with open(config_file, "r") as stream:
     try:
         config = yaml.safe_load(stream)
-        if args.split_data_path is None:
-            config["split_data_path"] = os.path.join(
-                os.path.join(project_path, config["split_data_path"])
-            )
-        else:
-            config["split_data_path"] = os.path.join(
-                os.path.join(project_path, args.split_data_path)
-            )
-        if args.ml_model_path is None:
-            config["ml_model_path"] = os.path.join(
-                os.path.join(project_path, config["ml_model_path"])
-            )
-        else:
-            config["ml_model_path"] = os.path.join(
-                os.path.join(project_path, args.ml_model_path)
-            )
-
     except yaml.YAMLError as exc:
         print(exc)
 
+if args.ml_model_path is None:
+    ml_model_path = os.path.join(project_path, config["ml_model_path"])
+else:
+    ml_model_path = os.path.join(project_path, args.ml_model_path)
+if args.split_data_path is None:
+    split_data_path = os.path.join(project_path, config["split_data_path"])
+else:
+    split_data_path = os.path.join(project_path, args.split_data_path)
+
+config['split_data_path']=split_data_path
+config['ml_model_path'] = ml_model_path
+
 logging.info("in functional testing")
 logging.info("files present in {}".format(config["split_data_path"]))
-split_data_path = config["split_data_path"]
 logging.info(','.join(os.listdir(split_data_path)))
 result_eda = housing_pre_process_eda(config)
 
