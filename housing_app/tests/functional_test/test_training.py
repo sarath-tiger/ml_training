@@ -41,10 +41,14 @@ with open(config_file, "r") as stream:
         print(exc)
 
 result_eda = housing_pre_process_eda(config)
+
+@pytest.mark.run(order=3)
 def test_housing_pre_process_eda():
     assert result_eda == True
 
 result_model = housing_model_build(config) 
+
+@pytest.mark.run(order=4)
 def test_housing_model_build():
     assert result_model == True
 
@@ -58,6 +62,7 @@ else:
     logging.error("Unable to get score")
 
 
+@pytest.mark.run(order=5)
 def test_get_score_LR():
     assert result_lr["result"] == True
 
@@ -70,8 +75,8 @@ if result_rf["result"]:
 else:
     logging.error("Unable to get score")
 
-
-def test_get_Score_tree():
+@pytest.mark.run(order=6)
+def test_get_score_tree():
     assert result_rf["result"] == True
 
 
@@ -86,5 +91,6 @@ else:
 logging.info("Script Completed after getting score")
 
 
+@pytest.mark.run(order=7)
 def test_result_final():
     assert result_final["result"] == True

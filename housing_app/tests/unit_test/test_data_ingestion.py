@@ -41,7 +41,7 @@ if data_result:
 else:
     logging.error("Data download has failed")
 
-@pytest.mark.first
+@pytest.mark.run(order=1)
 def test_fetch_housing_data():
     assert data_result == True
 
@@ -54,6 +54,6 @@ if split_result:
 else:
     logging.error("Data splitting failed")
 
-@pytest.mark.first
+@pytest.mark.run(order=2)
 def test_get_train_val_test_data():
     assert split_result == True
