@@ -14,7 +14,7 @@ args = parser.parse_args()
 
 log_initialize(os.path.basename(__file__))
 
-project_path = os.path.join("/".join(os.getcwd().split("housing_app")[0]),"housing_app")
+project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
 config_file = os.path.join(project_path, "config", "housing.yml")
 
 with open(config_file, "r") as stream:
