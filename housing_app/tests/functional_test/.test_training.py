@@ -88,9 +88,9 @@ def test_housing_pre_process_eda():
 # else:
 #     logging.error("Unable to get score")
 
-# logging.info("Script Completed after getting score")
-
 
 # @pytest.mark.run(order=7)
 # def test_result_final():
 #     assert result_final["result"] == True
+
+# logging.info("Script Completed after getting score")
