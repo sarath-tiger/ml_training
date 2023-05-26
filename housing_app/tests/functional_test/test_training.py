@@ -40,13 +40,13 @@ with open(config_file, "r") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-
+result_eda = housing_pre_process_eda(config)
 def test_housing_pre_process_eda():
-    assert housing_pre_process_eda(config) == True
+    assert result_eda == True
 
-
+result_model = housing_model_build(config) 
 def test_housing_model_build():
-    assert housing_model_build(config) == True
+    assert result_model == True
 
 
 result_lr = get_score_LR(config)
