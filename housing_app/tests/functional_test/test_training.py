@@ -40,6 +40,10 @@ with open(config_file, "r") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
+logging.info("in functional testing")
+logging.info("files present in {}".format(config["split_data_path"]))
+split_data_path = config["split_data_path"]
+logging.info(','.join(os.listdir(split_data_path)))
 result_eda = housing_pre_process_eda(config)
 
 @pytest.mark.run(order=3)
