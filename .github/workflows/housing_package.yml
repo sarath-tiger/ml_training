@@ -36,6 +36,7 @@ jobs:
         python -m build
         pip install dist/my_ml-0.0.1-py3-none-any.whl --force-reinstall
         cd ../../
+        pwd
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
