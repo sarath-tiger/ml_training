@@ -63,8 +63,14 @@ else:
 def test_get_train_val_test_data():
     assert split_result == True
 
-# result_eda = housing_pre_process_eda(config)
+result_eda = housing_pre_process_eda(config)
 
-# @pytest.mark.run(order=3)
-# def test_housing_pre_process_eda():
-#     assert result_eda == True
+@pytest.mark.run(order=3)
+def test_housing_pre_process_eda():
+    assert result_eda == True
+
+result_model = housing_model_build(config) 
+
+@pytest.mark.run(order=4)
+def test_housing_model_build():
+    assert result_model == True
