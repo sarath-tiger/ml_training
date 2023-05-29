@@ -9,6 +9,17 @@ log_initialize(os.path.basename(__file__))
 
 
 def get_score_LR(config):
+    """
+    This module is to get the score of Linear regression model with validation data set
+
+    Args:
+        config (dictionary): A dictonary containing keys ml_model_path (pickle file path) & split_data_path
+        (path containing test data set)
+
+    Returns (dictionary):
+        result: Boolean
+        score: {"lin_mae": lin_mae, "lin_rmse": lin_rmse}
+    """
     # lin_reg = pickle.load(os.path.join(config["ml_model_path"], "lin_reg.pkl"))
     logging.info("loading linear regression model")
     lin_reg = pickle.load(
@@ -31,6 +42,17 @@ def get_score_LR(config):
 
 
 def get_score_tree(config):
+    """
+    This module is to get the score of Decision Tree Regressor model with validation data set
+
+    Args:
+        config (dictionary): A dictonary containing keys ml_model_path (pickle file path) & split_data_path
+        (path containing test data set)
+
+    Returns (dictionary):
+        result: Boolean
+        score: {"tree_rmse": tree_rmse}
+    """
     logging.info("Loading tree reg model and data for validtion")
     tree_reg = pickle.load(
         open(os.path.join(config["ml_model_path"], "tree_reg.pkl"), "rb")
@@ -49,6 +71,18 @@ def get_score_tree(config):
 
 
 def final_predict(config):
+    """
+    This module is to get the score of Final model (best estimator) with validation data set
+
+    Args:
+        config (dictionary): A dictonary containing keys ml_model_path (pickle file path) & split_data_path
+        (path containing test data set)
+
+    Returns (dictionary):
+        result: Boolean
+        score: {"final_rmse": final_rmse}
+    """
+
     logging.info("Loading final model from pickle file and data for validation")
     final_model = pickle.load(
         open(os.path.join(config["ml_model_path"], "final_model.pkl"), "rb")

@@ -24,11 +24,29 @@ log_initialize(os.path.basename(__file__))
 
 
 def income_cat_proportions(data):
+    """
+    This module will add a column "income_cat" for the input dataframe
+
+    Args:
+        Dataframe
+
+    Returns:
+        Dataframe with added income_cat column
+    """
     logging.info("getting income cat proportions")
     return data["income_cat"].value_counts() / len(data)
 
 
 def housing_pre_process_eda(config):
+    """
+    This module has pre processing and EDA algorithm
+
+    Args:
+        config: A dictionary with split_data_path (splitted data path)
+
+    Returns:
+        Boolean
+    """
     logging.info("Starting housing preprocess & EDA")
     logging.info("split_data_path--> {}".format(config["split_data_path"]))
     housing = pd.read_csv(os.path.join(config["split_data_path"], "housing.csv"))
@@ -117,6 +135,16 @@ def housing_pre_process_eda(config):
 
 
 def housing_model_build(config):
+    """
+    This module has pre processing and EDA algorithm
+
+    Args:
+        config: A dictionary with split_data_path (splitted data path) and ml_model_path (path to save model)
+
+    Returns:
+        Boolean
+    """
+
     logging.info("Starting building models")
     housing_labels = pd.read_csv(
         os.path.join(config["split_data_path"], "housing_labels.csv")
