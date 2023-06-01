@@ -1,11 +1,18 @@
 import pickle
 import os
 import numpy as np
+import yaml
 import pandas as pd
+import argparse
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from my_ml.logger import logging, log_initialize
 
 log_initialize(os.path.basename(__file__))
+
+parser = argparse.ArgumentParser(add_help=False)
+parser.add_argument("split_data_path", nargs="?", type=str)
+parser.add_argument("ml_model_path", nargs="?", type=str)
+args = parser.parse_args()
 
 
 def get_score_LR(config):
@@ -20,6 +27,18 @@ def get_score_LR(config):
         result: Boolean
         score: {"lin_mae": lin_mae, "lin_rmse": lin_rmse}
     """
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+
+    if args.split_data_path is None:
+        config["split_data_path"] = os.path.join(
+            project_path, config["split_data_path"]
+        )
+    else:
+        config["split_data_path"] = os.path.join(project_path, args.split_data_path)
+    if args.ml_model_path is None:
+        config["ml_model_path"] = os.path.join(project_path, config["ml_model_path"])
+    else:
+        config["ml_model_path"] = os.path.join(project_path, args.ml_model_path)
     # lin_reg = pickle.load(os.path.join(config["ml_model_path"], "lin_reg.pkl"))
     logging.info("loading linear regression model")
     lin_reg = pickle.load(
@@ -53,6 +72,18 @@ def get_score_tree(config):
         result: Boolean
         score: {"tree_rmse": tree_rmse}
     """
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+
+    if args.split_data_path is None:
+        config["split_data_path"] = os.path.join(
+            project_path, config["split_data_path"]
+        )
+    else:
+        config["split_data_path"] = os.path.join(project_path, args.split_data_path)
+    if args.ml_model_path is None:
+        config["ml_model_path"] = os.path.join(project_path, config["ml_model_path"])
+    else:
+        config["ml_model_path"] = os.path.join(project_path, args.ml_model_path)
     logging.info("Loading tree reg model and data for validtion")
     tree_reg = pickle.load(
         open(os.path.join(config["ml_model_path"], "tree_reg.pkl"), "rb")
@@ -82,7 +113,18 @@ def final_predict(config):
         result: Boolean
         score: {"final_rmse": final_rmse}
     """
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
 
+    if args.split_data_path is None:
+        config["split_data_path"] = os.path.join(
+            project_path, config["split_data_path"]
+        )
+    else:
+        config["split_data_path"] = os.path.join(project_path, args.split_data_path)
+    if args.ml_model_path is None:
+        config["ml_model_path"] = os.path.join(project_path, config["ml_model_path"])
+    else:
+        config["ml_model_path"] = os.path.join(project_path, args.ml_model_path)
     logging.info("Loading final model from pickle file and data for validation")
     final_model = pickle.load(
         open(os.path.join(config["ml_model_path"], "final_model.pkl"), "rb")
@@ -97,3 +139,17 @@ def final_predict(config):
     final_mse = mean_squared_error(y_test, final_predictions)
     final_rmse = np.sqrt(final_mse)
     return {"result": True, "score": {"final_rmse": final_rmse}}
+
+
+if __name__ == "__main__":
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+    config_file = os.path.join(project_path, "config", "housing.yml")
+
+    with open(config_file, "r") as stream:
+        try:
+            config = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+    print(get_score_LR(config))
+    print(get_score_tree(config))
+    print(final_predict(config))

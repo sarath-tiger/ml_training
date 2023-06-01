@@ -16,6 +16,7 @@ def log_initialize(filename):
     log_path = os.path.join(
         project_path, "logs", "{}.log".format(filename.split(".")[0])
     )
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
     logging.basicConfig(
         filename=log_path,
         filemode="w",
