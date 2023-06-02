@@ -7,6 +7,8 @@ import warnings
 # import numpy as np
 import pandas as pd
 import numpy as np
+import argparse
+import yaml
 from scipy.stats import randint
 
 # from six.moves import urllib
@@ -21,6 +23,11 @@ from sklearn.tree import DecisionTreeRegressor
 
 warnings.filterwarnings("ignore")
 log_initialize(os.path.basename(__file__))
+
+parser = argparse.ArgumentParser(add_help=False)
+parser.add_argument("split_data_path", nargs="?", type=str)
+parser.add_argument("ml_model_path", nargs="?", type=str)
+args = parser.parse_args()
 
 
 def income_cat_proportions(data):
@@ -49,6 +56,18 @@ def housing_pre_process_eda(config):
     """
     logging.info("Starting housing preprocess & EDA")
     logging.info("split_data_path--> {}".format(config["split_data_path"]))
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+
+    if args.split_data_path is None:
+        config["split_data_path"] = os.path.join(
+            project_path, config["split_data_path"]
+        )
+    else:
+        config["split_data_path"] = os.path.join(project_path, args.split_data_path)
+    if args.ml_model_path is None:
+        config["ml_model_path"] = os.path.join(project_path, config["ml_model_path"])
+    else:
+        config["ml_model_path"] = os.path.join(project_path, args.ml_model_path)
     housing = pd.read_csv(os.path.join(config["split_data_path"], "housing.csv"))
     logging.info("Reading the required data files")
     strat_test_set = pd.read_csv(
@@ -144,7 +163,18 @@ def housing_model_build(config):
     Returns:
         Boolean
     """
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
 
+    if args.split_data_path is None:
+        config["split_data_path"] = os.path.join(
+            project_path, config["split_data_path"]
+        )
+    else:
+        config["split_data_path"] = os.path.join(project_path, args.split_data_path)
+    if args.ml_model_path is None:
+        config["ml_model_path"] = os.path.join(project_path, config["ml_model_path"])
+    else:
+        config["ml_model_path"] = os.path.join(project_path, args.ml_model_path)
     logging.info("Starting building models")
     housing_labels = pd.read_csv(
         os.path.join(config["split_data_path"], "housing_labels.csv")
@@ -268,3 +298,16 @@ def housing_model_build(config):
     logging.info("train script completed..!!")
 
     return True
+
+
+if __name__ == "__main__":
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+    config_file = os.path.join(project_path, "config", "housing.yml")
+
+    with open(config_file, "r") as stream:
+        try:
+            config = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+    housing_pre_process_eda(config)
+    housing_model_build(config)

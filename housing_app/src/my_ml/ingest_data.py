@@ -1,12 +1,18 @@
 import os
 import tarfile
+import yaml
 import pandas as pd
 import numpy as np
+import argparse
 from six.moves import urllib
 from my_ml.logger import log_initialize, logging
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 
 log_initialize(os.path.basename(__file__))
+parser = argparse.ArgumentParser(add_help=False)
+parser.add_argument("dataset_path", nargs="?", type=str)
+parser.add_argument("split_data_path", nargs="?", type=str)
+args = parser.parse_args()
 
 
 # Calling function to download data
@@ -21,6 +27,12 @@ def fetch_housing_data(git_url, data_path):
     Returns:
         Boolean
     """
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+    if args.dataset_path is None:
+        data_path = os.path.join(project_path, data_path)
+    else:
+        data_path = os.path.join(project_path, args.dataset_path)
+
     os.makedirs(data_path, exist_ok=True)
     tgz_path = os.path.join(data_path, "housing.tgz")
     urllib.request.urlretrieve(git_url, tgz_path)
@@ -42,6 +54,11 @@ def load_housing_data(data_path):
     Returns:
         Dataframe of csv data
     """
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+    if args.dataset_path is None:
+        data_path = os.path.join(project_path, data_path)
+    else:
+        data_path = os.path.join(project_path, args.dataset_path)
     csv_path = os.path.join(data_path, "housing.csv")
     logging.info("Convering housing to dataframe")
     return pd.read_csv(csv_path)
@@ -58,6 +75,15 @@ def get_train_val_test_data(data_path, split_data_path):
     Returns:
         Boolean
     """
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+    if args.dataset_path is None:
+        data_path = os.path.join(project_path, data_path)
+    else:
+        data_path = os.path.join(project_path, args.dataset_path)
+    if args.split_data_path is None:
+        split_data_path = os.path.join(project_path, split_data_path)
+    else:
+        split_data_path = os.path.join(project_path, args.split_data_path)
     logging.info("Started splitting the data")
     os.makedirs(split_data_path, exist_ok=True)
     housing = load_housing_data(data_path)
@@ -87,3 +113,16 @@ def get_train_val_test_data(data_path, split_data_path):
     housing.to_csv(os.path.join(split_data_path, "housing.csv"), index=False)
     logging.info("housing saved as csv")
     return True
+
+
+if __name__ == "__main__":
+    project_path = os.path.join((os.getcwd().split("housing_app")[0]), "housing_app")
+    config_file = os.path.join(project_path, "config", "housing.yml")
+
+    with open(config_file, "r") as stream:
+        try:
+            config = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+    fetch_housing_data(config["git_url"], config["dataset_out_path"])
+    get_train_val_test_data(config["dataset_out_path"], config["split_data_path"])
